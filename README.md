@@ -1,6 +1,18 @@
 # fxpt_atan2
 also check out https://github.com/rad1o/f1rmware/blob/master/portalib/fxpt_atan2.c
 
+
+    for(int32_t i=0; i<360; i += 5)
+    {
+        int16_t cs= 32767.0 * cos(i*PI / 180);
+        int16_t sn= 32767.0 * sin(i*PI / 180);
+
+        int16_t at2 = 32767.0 * atan2(sn, cs) / (PI);
+
+        printf(" angle = %i, fxpt_atan2 = %i, atan2 = %i, sn= %i cs=%i\n", i, fxpt_atan2(sn, cs), at2, sn, cs);
+    }
+
+
 test results
 
 
