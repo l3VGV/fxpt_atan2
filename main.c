@@ -90,7 +90,13 @@ int main()
 
         int16_t at2 = 32767.0 * atan2(sn, cs) / (PI);
 
-        printf(" angle = %i, fxpt_atan2 = %i, atan2 = %i, sn= %i cs=%i\n", i, fxpt_atan2(sn, cs), at2, sn, cs);
+        int16_t fxpt_at2 = fxpt_atan2(sn, cs);
+
+        float dif = 100.0*abs(at2-fxpt_at2)/at2;
+
+        int16_t iang = 2*32767.0 *i / 360.0;
+
+        printf(" angle = %i(%i), fxpt_atan2 = %i, atan2 = %i, dif=%f%, sn= %i cs=%i\n", i, iang, fxpt_at2, at2, dif, sn, cs);
     }
     return 0;
 }
