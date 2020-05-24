@@ -1,15 +1,13 @@
 # fxpt_atan2
 also check out https://github.com/rad1o/f1rmware/blob/master/portalib/fxpt_atan2.c
 
-
-  for(int i=0; i<360; i += 1)
+ for(int i=0; i<360; i += 1)
   {
       int16_t cs= 32767.0f * cos((float)i*PI / 180.0f);
       int16_t sn= 32767.0f * sin((float)i*PI / 180.0f);
       uint32_t atan2_clocks = 0;
       uint32_t fxpt_at2_clocks = 0;
-
-
+      
       startP = DWT->CYCCNT;
       int16_t at2 = 32767.0f * (float)atan2((float)sn, (float)cs) / (PI);
       endP = DWT->CYCCNT;
@@ -26,7 +24,9 @@ also check out https://github.com/rad1o/f1rmware/blob/master/portalib/fxpt_atan2
 
       printf(" angle = %i(%i), fxpt_atan2 = %i(%i), atan2 = %i(%i), dif=%f, sn= %i cs=%i \n", i, iang, fxpt_at2,fxpt_at2_clocks, at2, atan2_clocks, dif, sn, cs); 
       HAL_Delay(1);
-  }
+      }
+  
+  
 
 
 test results
