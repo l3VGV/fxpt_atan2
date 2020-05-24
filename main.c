@@ -83,20 +83,29 @@ int16_t fxpt_atan2(const int32_t y, const int32_t x) {
 
 int main()
 {
-    for(int32_t i=0; i<360; i += 5)
-    {
-        int16_t cs= 32767.0 * cos(i*PI / 180);
-        int16_t sn= 32767.0 * sin(i*PI / 180);
+ for(int i=0; i<360; i += 1)
+  {
+      int16_t cs= 32767.0f * cos((float)i*PI / 180.0f);
+      int16_t sn= 32767.0f * sin((float)i*PI / 180.0f);
+      uint32_t atan2_clocks = 0;
+      uint32_t fxpt_at2_clocks = 0;
+      
+      startP = DWT->CYCCNT;
+      int16_t at2 = 32767.0f * (float)atan2((float)sn, (float)cs) / (PI);
+      endP = DWT->CYCCNT;
+      atan2_clocks = endP - startP;
 
-        int16_t at2 = 32767.0 * atan2(sn, cs) / (PI);
+      startP = DWT->CYCCNT;
+      int16_t fxpt_at2 = fxpt_atan2(sn, cs);
+      endP = DWT->CYCCNT;
+      fxpt_at2_clocks = endP - startP;
 
-        int16_t fxpt_at2 = fxpt_atan2(sn, cs);
+      float dif = 100.0f*abs(at2-fxpt_at2)/at2;
 
-        float dif = 100.0*abs(at2-fxpt_at2)/at2;
+      int16_t iang = 2*32767.0f *i / 360.0f;
 
-        int16_t iang = 2*32767.0 *i / 360.0;
-
-        printf(" angle = %i(%i), fxpt_atan2 = %i, atan2 = %i, dif=%f%, sn= %i cs=%i\n", i, iang, fxpt_at2, at2, dif, sn, cs);
-    }
+      printf(" angle = %i(%i), fxpt_atan2 = %i(%i), atan2 = %i(%i), dif=%f, sn= %i cs=%i \n", i, iang, fxpt_at2,fxpt_at2_clocks, at2, atan2_clocks, dif, sn, cs); 
+      HAL_Delay(1);
+      }
     return 0;
 }
