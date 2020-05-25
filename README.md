@@ -38,7 +38,7 @@ also check out https://github.com/rad1o/f1rmware/blob/master/portalib/fxpt_atan2
   
 
 
-test results
+test results, stm32f103 72MHz
 ```
 angle = 0(0), fxpt_atan2 = 0(104), atan2f = 0(136), atan2 = 0(372), dif=nan, sn= 0 cs=32767 
  angle = 1(182), fxpt_atan2 = 191(104), atan2f = 181(2273), atan2 = 181(5526), dif=5.524862, sn= 571 cs=32762 
