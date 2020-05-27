@@ -1,7 +1,7 @@
 # fxpt_atan2
 also check out https://github.com/rad1o/f1rmware/blob/master/portalib/fxpt_atan2.c
 
-```
+```C
   for(int i=0; i<360; i += 1)
   {
       int16_t cs= 32767.0f * cos((float)i*PI / 180.0f);
